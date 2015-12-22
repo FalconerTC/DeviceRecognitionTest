@@ -1,0 +1,21 @@
+{
+  "name": "DeviceRecognitionTest",
+  "version": "0.0.0",
+  "description": "A node program to uniquely and consistently identify browsers",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FalconerTC/DeviceRecognitionTest.git"
+  },
+  "author": "Falcon Taylor-Carter",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FalconerTC/DeviceRecognitionTest/issues"
+  },
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
