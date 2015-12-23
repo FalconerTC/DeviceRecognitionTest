@@ -1,9 +1,11 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var sha1 = require('js-sha1')
 var app = express();
 
+var registeredDevices = [];
+
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
-app.use('/js-sha1', express.static(__dirname + '/node_modules/js-sha1/build/'));
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
@@ -12,12 +14,24 @@ app.get('/', function(req, res) {
 });
 
 app.post("/", function(req, res) {
-    var OS = req.body.hash;
-    console.log(OS);
-    var ip = req.ip;
-    console.log('User connected: %s', ip);
-    //return res.json({a: "a"}, 200);
-    res.end("Words");
+    var id = req.body.id;
+    var hash = sha1(req.ip + id);
+
+    var deviceVal = 0;
+    /* Check if device is registered */
+    registeredDevices.forEach(function(elem) {
+	if (elem.id === hash)
+          deviceVal = (++elem.count);
+    });
+
+    if (deviceVal <= 0) {
+	var device = {id: hash, count: 1};
+	var index = registeredDevices.push(device);
+	console.log("Added device number: "+ (index + 1) + " id: "+hash);
+    }
+
+    var response = (deviceVal > 0 ? "Access count: " + deviceVal : "New device added!");
+    res.end(response);
 });
 
 var server = app.listen(3000, function() {

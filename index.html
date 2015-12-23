@@ -2,18 +2,16 @@
 <html>
 <head>
 	<script src="/jquery/jquery.min.js"></script>
-	<script src="/js-sha1/sha1.min.js"></script>
 </head>
 <body>
 	<script>
-
-	identifier = navigator.platform + window.width + window.height; 
-	hash = sha1(identifier);
+	/* Send device-specific information to be used in unique identification */
+	id = navigator.platform + " " + screen.width + " " + screen.height; 
 
 	$.ajax({
 	  url: '/',
 	  type: 'POST',
-	  data: JSON.stringify( {hash: hash}),
+	  data: JSON.stringify( {id: id}),
 	  success: function(data) {
 	    $('#response').text(data);
 	  },
