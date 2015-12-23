@@ -2,21 +2,20 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
-app.use('/scripts', express.static(__dirname + '/node_modules/jquery/dist/'));
-app.use('/public', express.static(__dirname + '/public'));
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
+app.use('/js-sha1', express.static(__dirname + '/node_modules/js-sha1/build/'));
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
-    //res.send('Hi');
     res.sendFile(__dirname + "/index.html");
 
-    var ip = req.ip;
-    console.log('User connected: %s', ip);
 });
 
 app.post("/", function(req, res) {
-    var OS = req.body.OS;
+    var OS = req.body.hash;
     console.log(OS);
+    var ip = req.ip;
+    console.log('User connected: %s', ip);
     //return res.json({a: "a"}, 200);
     res.end("Words");
 });

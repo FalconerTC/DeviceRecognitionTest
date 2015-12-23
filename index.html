@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script src="/scripts/jquery.min.js"></script>
+	<script src="/jquery/jquery.min.js"></script>
+	<script src="/js-sha1/sha1.min.js"></script>
 </head>
 <body>
 	<script>
 
-	OS = "some"
+	identifier = navigator.platform + window.width + window.height; 
+	hash = sha1(identifier);
 
 	$.ajax({
 	  url: '/',
 	  type: 'POST',
-	  data: JSON.stringify( {OS:"OS"}),
+	  data: JSON.stringify( {hash: hash}),
 	  success: function(data) {
 	    $('#response').text(data);
 	  },
 	  contentType: "application/json"
 	});
 	</script>
-	<p id="response">Hi</p>
+	<p id="response">Waiting for response...</p>
 </body>
 </html>
