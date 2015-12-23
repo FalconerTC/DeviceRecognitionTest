@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script src="/scripts/client.min.js"></script>
-	<script src="public/client.js"></script>
+	<script src="/scripts/jquery.min.js"></script>
 </head>
 <body>
-<p>Hi</p>
+	<script>
+
+	OS = "some"
+
+	$.ajax({
+	  url: '/',
+	  type: 'POST',
+	  data: JSON.stringify( {OS:"OS"}),
+	  success: function(data) {
+	    $('#response').text(data);
+	  },
+	  contentType: "application/json"
+	});
+	</script>
+	<p id="response">Hi</p>
 </body>
 </html>
