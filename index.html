@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<script src="/jquery/jquery.min.js"></script>
-</head>
-<body>
-	<script>
-	/* Send device-specific information to be used in unique identification */
-	id = navigator.platform + " " + screen.width + " " + screen.height; 
 
-	$.ajax({
-	  url: '/',
-	  type: 'POST',
-	  data: JSON.stringify( {id: id}),
-	  success: function(data) {
-	    $('#response').text(data);
-	  },
-	  contentType: "application/json"
-	});
-	</script>
-	<p id="response">Waiting for response...</p>
+<head>
+    <script src="/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    <script>
+        /* Send device-specific information to be used in unique identification */
+        id = navigator.platform + " " + screen.width + " " + screen.height;
+
+        $.ajax({
+            url: '/',
+            type: 'POST',
+            data: JSON.stringify({
+                id: id
+            }),
+            success: function(data) {
+                $('#response').text(data);
+            },
+            contentType: "application/json"
+        });
+    </script>
+    <p id="response">Waiting for response...</p>
 </body>
+
 </html>
